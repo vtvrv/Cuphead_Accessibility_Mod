@@ -10,9 +10,9 @@ Run game, then close.
 
 Place Cuphead_Accessibility.dll into the Cuphead\BepInEx\plugins\ directory. 
 
-Confirmed working with GOG versions of Cuphead versions all version of Cuphead up to 1.3.2.
+Confirmed working with versions of Cuphead.
 
-Steam may cause issues. 
+Steam may cause issues I've only tried the GOG release. 
 
 ## Features
 - Disable film grain
