@@ -24,11 +24,12 @@ Steam may cause issues I've only tried the GOG release.
 
 \* By default every feature except "disable HUD" is enabled.
 
-Every feature can be toggled by editing "Cuphead\BepinEx\config\Cuphead_QOL.cfg"
+Every feature can be toggled by editing "Cuphead\BepinEx\config\Cuphead_Accessibility.cfg"
 
 The game must be restarted to reflect configuration file changes.
 
 ## Known bugs.
+- Controller binds disregarded at launch. Temporary fix disable "Launch to Title Screen" in config file.
 - "Launch To Tile Screen" not working with Cuphead version 1.0.
 - Level select debug menu freezes on version 1.3.2
 - "Disable Film Grain" also disables optional color filters and Flower Boss psychedelic effect.
