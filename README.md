@@ -22,7 +22,7 @@ Steam may cause issues.
 - Level select menu (press Home Key at any time)
 - Healthbar
 
-\* By default all every feature except "disable HUD" is enabled.
+\* By default every feature except "disable HUD" is enabled.
 
 Every feature can be toggled by editing "Cuphead\BepinEx\config\Cuphead_QOL.cfg"
 
