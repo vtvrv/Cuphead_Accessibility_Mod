@@ -5,8 +5,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-//level select debug menu freezes on version 1.3.2
-
 namespace CupheadQOL
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
@@ -15,7 +13,7 @@ namespace CupheadQOL
         static public ConfigEntry<bool> disableHUD;
         static public ConfigEntry<bool> disableGrain;
         static public ConfigEntry<bool> hideLevelIntroAnim;
-        static public ConfigEntry<bool> launchToTitleScreen;
+        //static public ConfigEntry<bool> launchToTitleScreen;  //Game forgets controller setting on Cuphead 1.3.2. Never worked on Cuphead 1.0
         static public ConfigEntry<bool> disableScreenShake;
         static public ConfigEntry<bool> disableHitFlash;
         static public ConfigEntry<bool> disableBossExplosions;
@@ -34,7 +32,7 @@ namespace CupheadQOL
             disableHUD = Config.Bind("Toggles", "Disable HUD", false);
             disableGrain = Config.Bind("Toggles", "Disable Film Grain Effects", true);
             hideLevelIntroAnim = Config.Bind("Toggles", "Hide Level Intro Animation", true);
-            launchToTitleScreen = Config.Bind("Toggles", "Launch to Title Screen", true);
+            //launchToTitleScreen = Config.Bind("Toggles", "Launch to Title Screen", false);
             disableScreenShake = Config.Bind("Toggles", "Disable Screen Shake", true);
             disableHitFlash = Config.Bind("Toggles", "Disable Hit Flash", true);
             disableBossExplosions = Config.Bind("Toggles", "Disable Boss Explosion Effects", true);
@@ -83,8 +81,8 @@ namespace CupheadQOL
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableScreenShakeHook));
             if (hideLevelIntroAnim.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HideLevelIntroAnimHook));
-            if (launchToTitleScreen.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.LauchToTileHook));
+            //if (launchToTitleScreen.Value)
+            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.LauchToTileHook));
             if (displayHealthbar.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HealthBarHookcs));
             //if(disableAudioWarble.Value)
@@ -94,6 +92,9 @@ namespace CupheadQOL
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Bee));
             if (photosensitiveBossFix_Dragon.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Dragon));
+
+
+            Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.MuteAnnouncer));
         }
 
         private void Update()
