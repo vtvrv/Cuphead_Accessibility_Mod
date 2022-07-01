@@ -10,7 +10,7 @@ Run game, then close.
 
 Place Cuphead_Accessibility.dll into the Cuphead\BepInEx\plugins\ directory. 
 
-Confirmed working with versions of Cuphead.
+Confirmed working with all versions of Cuphead.
 
 Steam may cause issues I've only tried the GOG release. 
 
