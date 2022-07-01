@@ -19,7 +19,6 @@ Steam may cause issues I've only tried the GOG release.
 - Photosensitive accessibility changes (disables hitflash, screen shake, flashing level intro, boss explosion animations, and adjusts scenery)
 - Skip launch intro movies
 - Disable HUD*
-- Level select menu (press Home Key at any time)
 - Healthbar
 
 \* By default every feature except "disable HUD" is enabled.
@@ -29,8 +28,5 @@ Every feature can be toggled by editing "Cuphead\BepinEx\config\Cuphead_Accessib
 The game must be restarted to reflect configuration file changes.
 
 ## Known bugs.
-- Controller binds disregarded at launch. Temporary fix disable "Launch to Title Screen" in config file.
-- "Launch To Tile Screen" not working with Cuphead version 1.0.
-- Level select debug menu freezes on version 1.3.2
-- "Disable Film Grain" also disables optional color filters and Flower Boss psychedelic effect.
-- There is one frame of lightning at the beginning of the Dragon Boss final phase.
+- "Disable Film Grain" also disables optional color filters and flower bss psychedelic effect.
+- With the dragon boss photosensensitivity fix enabled there is one frame of his final phase
