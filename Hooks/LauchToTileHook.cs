@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿/*
+using HarmonyLib;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections;
@@ -15,3 +16,4 @@ namespace CupheadQOL.Hooks
         }
     }
 }
+*/
