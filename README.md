@@ -30,3 +30,7 @@ The game must be restarted to reflect configuration file changes.
 ## Known bugs.
 - "Disable Film Grain" also disables optional color filters and flower bss psychedelic effect.
 - With the dragon boss photosensensitivity fix enabled there is still one frame of lightning at the beginning of his final phase.
+
+## Compiling
+Add assembly reference to "Aseembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
+This maintains compatibility with all versions of Cuphead.
