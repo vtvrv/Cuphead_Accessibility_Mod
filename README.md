@@ -33,4 +33,5 @@ The game must be restarted to reflect configuration file changes.
 
 ## Compiling
 Add assembly reference to "Aseembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
+
 This maintains compatibility with all versions of Cuphead.
