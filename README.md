@@ -2,6 +2,8 @@
 
 ## Installation
 
+Download latest Cuphead_Accessibility.dll https://github.com/vtvrv/Cuphead_Accessibility_Mod/releases
+
 Download BepinEx version 5. https://github.com/BepInEx/BepInEx/releases (Tested with 5.4.19) 
 
 Extract contents of BepInEx zip to the Cuphead game folder. 
@@ -12,12 +14,10 @@ Place Cuphead_Accessibility.dll into the Cuphead\BepInEx\plugins\ directory.
 
 Confirmed working with all versions of Cuphead.
 
-Steam may cause issues I've only tried the GOG release. 
-
 ## Features
 - Disable film grain
 - Photosensitive accessibility changes (disables hitflash, screen shake, flashing level intro, boss explosion animations, and adjusts scenery)
-- Skip launch intro movies
+- Disable flashing level intro
 - Disable HUD*
 - Healthbar
 
@@ -29,4 +29,4 @@ The game must be restarted to reflect configuration file changes.
 
 ## Known bugs.
 - "Disable Film Grain" also disables optional color filters and flower bss psychedelic effect.
-- With the dragon boss photosensensitivity fix enabled there is one frame of his final phase
+- With the dragon boss photosensensitivity fix enabled there is still one frame of lightning at the beginning of his final phase.
