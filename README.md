@@ -5,7 +5,7 @@
 
 Download latest Cuphead_Accessibility.dll https://github.com/vtvrv/Cuphead_Accessibility_Mod/releases
 
-Download BepinEx version 5. https://github.com/BepInEx/BepInEx/releases (Tested with 5.4.19) 
+Download BepinEx x64 version 5. https://github.com/BepInEx/BepInEx/releases (Tested with 5.4.19) 
 
 Extract contents of BepInEx zip to the Cuphead game folder. 
 
