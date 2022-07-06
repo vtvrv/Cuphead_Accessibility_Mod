@@ -1,4 +1,5 @@
-# Cuphead_Accessibility_Mod
+# Cuphead_Accessibility_Mod  <img src="https://raw.githubusercontent.com/vtvrv/Cuphead_Accessibility_Mod/main/images/example01_360p.jpg">
+
 
 ## Installation
 
@@ -30,6 +31,8 @@ The game must be restarted to reflect configuration file changes.
 ## Known bugs.
 - "Disable Film Grain" also disables optional color filters and flower bss psychedelic effect.
 - With the dragon boss photosensensitivity fix enabled there is still one frame of lightning at the beginning of his final phase.
+- Player 2 HUD not disabled if player joins mid level. Hud disabled after retrying stage
+- Debug Menu freezes on Cuphead version 1.3.2. Can be fixed by opening Unity Explorer plugin while loading debug menu.
 
 ## Compiling
 Add assembly reference to "Aseembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
