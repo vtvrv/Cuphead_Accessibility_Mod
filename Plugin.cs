@@ -13,36 +13,42 @@ namespace CupheadQOL
         static public ConfigEntry<bool> disableHUD;
         static public ConfigEntry<bool> disableGrain;
         static public ConfigEntry<bool> hideLevelIntroAnim;
-        //static public ConfigEntry<bool> launchToTitleScreen;  //Game forgets controller setting on Cuphead 1.3.2. Never worked on Cuphead 1.0
         static public ConfigEntry<bool> disableScreenShake;
         static public ConfigEntry<bool> disableHitFlash;
         static public ConfigEntry<bool> disableBossExplosions;
         static public ConfigEntry<bool> accessLevelSelect;
         static public ConfigEntry<bool> displayHealthbar;
-        //static public ConfigEntry<bool> disableAudioWarble;	//change not noticable. may cause problems.
+        static public ConfigEntry<bool> drawExtraHealthbarInfo;
+        static public ConfigEntry<bool> muteAnnouncer;
         static public ConfigEntry<bool> photosensitiveBossFix_Dragon;
         static public ConfigEntry<bool> photosensitiveBossFix_Bee;
+        static public ConfigEntry<bool> photosensitiveBossFix_FlyingHorse;
+        //static public ConfigEntry<bool> launchToTitleScreen;  //Game forgets controller setting on Cuphead 1.3.2. Never worked on Cuphead 1.0
+        //static public ConfigEntry<bool> disableAudioWarble;	//Change not noticable. May cause problems.
 
         public GUIStyle textureStyle;
+        public GUIStyle fontStyle;
 
         public static Rect healthBarBackgroundPos;
+        public static Rect healthBarTextPos;
 
         private void Awake()
         {
             disableHUD = Config.Bind("Toggles", "Disable HUD", false);
             disableGrain = Config.Bind("Toggles", "Disable Film Grain Effects", true);
             hideLevelIntroAnim = Config.Bind("Toggles", "Hide Level Intro Animation", true);
-            //launchToTitleScreen = Config.Bind("Toggles", "Launch to Title Screen", false);
             disableScreenShake = Config.Bind("Toggles", "Disable Screen Shake", true);
             disableHitFlash = Config.Bind("Toggles", "Disable Hit Flash", true);
             disableBossExplosions = Config.Bind("Toggles", "Disable Boss Explosion Effects", true);
             accessLevelSelect = Config.Bind("Toggles", "Access Level Select", true, "Backspace key opens level select");
             displayHealthbar = Config.Bind("Toggles", "Display Healthbar", true);
-            //disableAudioWarble = Config.Bind("Toggles", "Disable Audio Warble", false);
-
+            drawExtraHealthbarInfo = Config.Bind("Toggles", "Draw Extra Healthbar Info", true);
+            muteAnnouncer = Config.Bind("Toggles", "Mute Announcer Intro", false);
             photosensitiveBossFix_Bee = Config.Bind("Toggles", "Photosensitive Boss Fix - Bee", true);
             photosensitiveBossFix_Dragon = Config.Bind("Toggles", "Photosensitive Boss Fix - Dragon", true);
-            //PlayerDebug.Enable();
+            photosensitiveBossFix_FlyingHorse = Config.Bind("Toggles", "Photosensitive Boss Fix - Flying Horse", true);
+            //launchToTitleScreen = Config.Bind("Toggles", "Launch to Title Screen", false);
+            //disableAudioWarble = Config.Bind("Toggles", "Disable Audio Warble", false);
 
             UpdateHealthBarDimensions(Screen.width, Screen.height);
 
@@ -52,6 +58,12 @@ namespace CupheadQOL
 
             textureStyle = new GUIStyle();
             textureStyle.normal.background = backgroundTexture;
+
+            //drawExtraHealthbarInfo text
+            fontStyle = new GUIStyle();
+            fontStyle.fontSize = 30;
+            fontStyle.fontStyle = FontStyle.Bold;
+            fontStyle.normal.textColor = Color.yellow;
         }
 
         public void DrawRect(Rect position, Color color)
@@ -65,6 +77,10 @@ namespace CupheadQOL
             float healthBarWidth = w * 0.25f;
             float healthBarHeight = h * 0.05f;
             healthBarBackgroundPos = new Rect((w - healthBarWidth) / 2f, healthBarHeight, healthBarWidth, healthBarHeight);
+
+            healthBarTextPos = healthBarBackgroundPos;
+            healthBarTextPos.y += 11f; //center text,
+            healthBarTextPos.x += 2f; 
         }
 
         public void ApplyHooks()
@@ -81,20 +97,22 @@ namespace CupheadQOL
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableScreenShakeHook));
             if (hideLevelIntroAnim.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HideLevelIntroAnimHook));
-            //if (launchToTitleScreen.Value)
-            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.LauchToTileHook));
+            if (muteAnnouncer.Value)
+                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.MuteAnnouncer));
             if (displayHealthbar.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HealthBarHookcs));
-            //if(disableAudioWarble.Value)
-            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableAudioWarbleHook));
-
             if (photosensitiveBossFix_Bee.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Bee));
             if (photosensitiveBossFix_Dragon.Value)
                 Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Dragon));
+            if (photosensitiveBossFix_FlyingHorse.Value)
+                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.FlyingHorse));
+            //if (launchToTitleScreen.Value)
+            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.LauchToTileHook));
+            //if(disableAudioWarble.Value)
+            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableAudioWarbleHook));
 
-
-            Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.MuteAnnouncer));
+            Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DebugMenuFix));
         }
 
         private void Update()
@@ -121,11 +139,6 @@ namespace CupheadQOL
 
         }
 
-        private void Config_SettingChanged(object sender, SettingChangedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         internal void Main()
         {
             ApplyHooks();
@@ -140,6 +153,21 @@ namespace CupheadQOL
                     Rect currentHealthPos = healthBarBackgroundPos;
                     currentHealthPos.width *= 1f - (Level.Current.timeline.damage / Level.Current.timeline.health);
                     DrawRect(currentHealthPos, Color.red);
+                    
+                    if(drawExtraHealthbarInfo.Value)
+                    {
+                        //draw phase markers on healthbar
+                        foreach (var phase in Level.Current.timeline.events)
+                        {
+                            Rect eventRect = healthBarBackgroundPos;
+                            eventRect.x += (healthBarBackgroundPos.width * phase.percentage);
+                            eventRect.width = 3f;
+                            DrawRect(eventRect, Color.white);
+                        }
+
+                        //draw current damage/health text
+                        GUI.Label(healthBarTextPos, Level.Current.timeline.damage.ToString("0000") + "/" + Level.Current.timeline.health.ToString(), fontStyle);
+                    }
                 }
         }
     }
