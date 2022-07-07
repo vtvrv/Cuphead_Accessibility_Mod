@@ -35,6 +35,11 @@ The game must be restarted to reflect configuration file changes.
 - Debug Menu freezes on Cuphead version 1.3.2. Can be fixed by opening Unity Explorer plugin while loading debug menu.
 
 ## Compiling
-Add assembly reference to "Aseembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
+To set up the poject I followed this tutorial https://docs.bepinex.dev/master/articles/dev_guide/plugin_tutorial/index.html  
+Initializing the plugin project I used these two commands  
+- dotnet new bepinex5plugin -n Cuphead_Accessibility -T net35 -U 5.6.2  
+- dotnet restore Cuphead_Accessibility
+
+Added an assembly reference to "Assembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
 
 This maintains compatibility with all versions of Cuphead.
