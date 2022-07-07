@@ -3,7 +3,7 @@ using UnityEngine;
 
 //"Level/Background/FireFG"
 
-namespace CupheadQOL.Hooks.BossFixes
+namespace Cuphead_Accessibility.Hooks.BossFixes
 {
     internal class Cigar
     {

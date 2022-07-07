@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace CupheadQOL.Hooks.BossFixes
+namespace Cuphead_Accessibility.Hooks.BossFixes
 {
     internal class FlyingHorse
     {
