@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-namespace CupheadQOL
+namespace Cuphead_Accessibility
 {
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
@@ -86,33 +86,33 @@ namespace CupheadQOL
         public void ApplyHooks()
         {
             if (disableBossExplosions.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableBossExplosionsHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableBossExplosionsHook));
             if (disableGrain.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableGrainHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableGrainHook));
             if (disableHitFlash.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableHitFlashHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableHitFlashHook));
             if (disableHUD.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableHUDHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableHUDHook));
             if (disableScreenShake.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableScreenShakeHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableScreenShakeHook));
             if (hideLevelIntroAnim.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HideLevelIntroAnimHook));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.HideLevelIntroAnimHook));
             if (muteAnnouncer.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.MuteAnnouncer));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.MuteAnnouncer));
             if (displayHealthbar.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.HealthBarHookcs));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.HealthBarHookcs));
             if (photosensitiveBossFix_Bee.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Bee));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.Bee));
             if (photosensitiveBossFix_Dragon.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.Dragon));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.Dragon));
             if (photosensitiveBossFix_FlyingHorse.Value)
-                Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.BossFixes.FlyingHorse));
+                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.FlyingHorse));
             //if (launchToTitleScreen.Value)
-            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.LauchToTileHook));
+            //    Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.LauchToTileHook));
             //if(disableAudioWarble.Value)
-            //    Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DisableAudioWarbleHook));
+            //    Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableAudioWarbleHook));
 
-            Harmony.CreateAndPatchAll(typeof(CupheadQOL.Hooks.DebugMenuFix));
+            Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DebugMenuFix));
         }
 
         private void Update()

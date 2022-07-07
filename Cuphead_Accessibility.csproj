@@ -2,26 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net35</TargetFramework>
-	  <AssemblyName>Cuphead_Accessibility</AssemblyName>
-    <Description>Adds accessibility features to Cuphead</Description>
+    <AssemblyName>Cuphead_Accessibility</AssemblyName>
+    <Description>My first plugin</Description>
     <Version>1.0.0</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>CupheadQOL</RootNamespace>
-    <Authors>$(AssemblyName)</Authors>
-    <Product>$(AssemblyName)</Product>
-    <PackageId>$(AssemblyName)</PackageId>
-    <PlatformTarget>x64</PlatformTarget>
-    <BaseOutputPath>bin</BaseOutputPath>
-    <DebugType>none</DebugType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DefineConstants>$(DefineConstants)TRACE</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
