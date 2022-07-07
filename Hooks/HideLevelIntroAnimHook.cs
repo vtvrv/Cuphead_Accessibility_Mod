@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace CupheadQOL.Hooks
+namespace Cuphead_Accessibility.Hooks
 {
     internal class HideLevelIntroAnimHook
     {

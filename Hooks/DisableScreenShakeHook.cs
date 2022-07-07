@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace CupheadQOL.Hooks
+namespace Cuphead_Accessibility.Hooks
 {
     internal class DisableScreenShakeHook
     {

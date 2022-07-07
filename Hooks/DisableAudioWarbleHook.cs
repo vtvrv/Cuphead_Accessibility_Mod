@@ -3,7 +3,7 @@ using HarmonyLib;
 using UnityEngine;
 using System;
 
-namespace CupheadQOL.Hooks
+namespace Cuphead_Accessibility.Hooks
 {
     internal class DisableAudioWarbleHook
     {

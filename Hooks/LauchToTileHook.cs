@@ -5,7 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CupheadQOL.Hooks
+namespace Cuphead_Accessibility.Hooks
 {
     internal class LauchToTileHook
     {
