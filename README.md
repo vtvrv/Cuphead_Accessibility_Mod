@@ -5,7 +5,9 @@
 
 Download latest Cuphead_Accessibility.dll https://github.com/vtvrv/Cuphead_Accessibility_Mod/releases
 
-Download BepinEx x64 version 5. https://github.com/BepInEx/BepInEx/releases (Tested with 5.4.19) 
+Determine if your version of Cuphead is x86 or x64 by running the game and opening Task Manager. If process is named "Cuphead.exe (32 bit)" it is x86. If not it is x64.
+
+Download the appropriate x86 or x64 version of BepinEx 5. https://github.com/BepInEx/BepInEx/releases (Tested with 5.4.19) 
 
 Extract contents of BepInEx zip to the Cuphead game folder. 
 
@@ -40,6 +42,6 @@ Initializing the plugin project I used these two commands
 - dotnet new bepinex5plugin -n Cuphead_Accessibility -T net35 -U 5.6.2  
 - dotnet restore Cuphead_Accessibility
 
-Added an assembly reference to "Assembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
+Add an assembly reference to "Assembly-CSharp.dll" of Cuphead Legacy Version (The version built on Unity Version 5). 
 
 This maintains compatibility with all versions of Cuphead.
