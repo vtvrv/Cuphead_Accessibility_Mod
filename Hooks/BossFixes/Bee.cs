@@ -9,9 +9,7 @@ namespace Cuphead_Accessibility.Hooks.BossFixes
         [HarmonyPostfix, HarmonyPatch(typeof(BeeLevelBackground), "LevelInit")]
         private static void LevelInit(BeeLevelBackground __instance)
         {
-            GameObject honeyObj = GameObject.Find("Honey");
-            if (honeyObj != null)
-                GameObject.Destroy(honeyObj);
+            Plugin.DestroyObj("Honey");
         }
 
         //Destroy honey dripping from top of level
