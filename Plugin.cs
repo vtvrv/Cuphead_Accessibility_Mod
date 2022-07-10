@@ -7,6 +7,7 @@ using System.IO;
 
 namespace Cuphead_Accessibility
 {
+
     [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
     public class Plugin : BaseUnityPlugin
     {
@@ -18,7 +19,7 @@ namespace Cuphead_Accessibility
         static public ConfigEntry<bool> disableBossExplosions;
         static public ConfigEntry<bool> accessLevelSelect;
         static public ConfigEntry<bool> displayHealthbar;
-        static public ConfigEntry<bool> drawExtraHealthbarInfo;
+        static public ConfigEntry<bool> displayExtraHealthbarInfo;
         static public ConfigEntry<bool> muteAnnouncer;
         static public ConfigEntry<bool> photosensitiveBossFix_Dragon;
         static public ConfigEntry<bool> photosensitiveBossFix_Bee;
@@ -27,10 +28,12 @@ namespace Cuphead_Accessibility
         //static public ConfigEntry<bool> disableAudioWarble;	//Change not noticable. May cause problems.
 
         public GUIStyle textureStyle;
-        public GUIStyle fontStyle;
+        public static GUIStyle fontStyle;
 
         public static Rect healthBarBackgroundPos;
         public static Rect healthBarTextPos;
+
+        public static string healthBarText = "????/????";
 
         private void Awake()
         {
@@ -42,7 +45,7 @@ namespace Cuphead_Accessibility
             disableBossExplosions = Config.Bind("Toggles", "Disable Boss Explosion Effects", true);
             accessLevelSelect = Config.Bind("Toggles", "Access Level Select", true, "Backspace key opens level select");
             displayHealthbar = Config.Bind("Toggles", "Display Healthbar", true);
-            drawExtraHealthbarInfo = Config.Bind("Toggles", "Draw Extra Healthbar Info", true);
+            displayExtraHealthbarInfo = Config.Bind("Toggles", "Draw Extra Healthbar Info", true);
             muteAnnouncer = Config.Bind("Toggles", "Mute Announcer Intro", false);
             photosensitiveBossFix_Bee = Config.Bind("Toggles", "Photosensitive Boss Fix - Bee", true);
             photosensitiveBossFix_Dragon = Config.Bind("Toggles", "Photosensitive Boss Fix - Dragon", true);
@@ -50,7 +53,6 @@ namespace Cuphead_Accessibility
             //launchToTitleScreen = Config.Bind("Toggles", "Launch to Title Screen", false);
             //disableAudioWarble = Config.Bind("Toggles", "Disable Audio Warble", false);
 
-            UpdateHealthBarDimensions(Screen.width, Screen.height);
 
             Texture2D backgroundTexture = new Texture2D(1, 1);
             backgroundTexture.SetPixel(0, 0, Color.white);
@@ -61,9 +63,10 @@ namespace Cuphead_Accessibility
 
             //drawExtraHealthbarInfo text
             fontStyle = new GUIStyle();
-            fontStyle.fontSize = 30;
             fontStyle.fontStyle = FontStyle.Bold;
             fontStyle.normal.textColor = Color.yellow;
+
+            UpdateHealthBarDimensions(Screen.width, Screen.height);
         }
 
         public void DrawRect(Rect position, Color color)
@@ -79,40 +82,43 @@ namespace Cuphead_Accessibility
             healthBarBackgroundPos = new Rect((w - healthBarWidth) / 2f, healthBarHeight, healthBarWidth, healthBarHeight);
 
             healthBarTextPos = healthBarBackgroundPos;
-            healthBarTextPos.y += 11f; //center text,
-            healthBarTextPos.x += 2f; 
+            healthBarTextPos.y += healthBarHeight * 0.2f;
+            healthBarTextPos.x += healthBarWidth * 0.02f;
+            fontStyle.fontSize = (int)(healthBarHeight * 0.6f);
         }
 
         public void ApplyHooks()
         {
             if (disableBossExplosions.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableBossExplosionsHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.DisableBossExplosionsHook));
             if (disableGrain.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableGrainHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.DisableGrainHook));
             if (disableHitFlash.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableHitFlashHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.DisableHitFlashHook));
             if (disableHUD.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableHUDHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.DisableHUDHook));
             if (disableScreenShake.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableScreenShakeHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.DisableScreenShakeHook));
             if (hideLevelIntroAnim.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.HideLevelIntroAnimHook));
+                Harmony.CreateAndPatchAll(typeof(Hooks.HideLevelIntroAnimHook));
             if (muteAnnouncer.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.MuteAnnouncer));
+                Harmony.CreateAndPatchAll(typeof(Hooks.MuteAnnouncer));
             if (displayHealthbar.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.HealthBarHookcs));
+                Harmony.CreateAndPatchAll(typeof(Hooks.HealthBarHook));
+            if(displayExtraHealthbarInfo.Value)
+                Harmony.CreateAndPatchAll(typeof(Hooks.HealthBarTextHook));
             if (photosensitiveBossFix_Bee.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.Bee));
+                Harmony.CreateAndPatchAll(typeof(Hooks.BossFixes.Bee));
             if (photosensitiveBossFix_Dragon.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.Dragon));
+                Harmony.CreateAndPatchAll(typeof(Hooks.BossFixes.Dragon));
             if (photosensitiveBossFix_FlyingHorse.Value)
-                Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.BossFixes.FlyingHorse));
+                Harmony.CreateAndPatchAll(typeof(Hooks.BossFixes.FlyingHorse));
             //if (launchToTitleScreen.Value)
-            //    Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.LauchToTileHook));
+            //    Harmony.CreateAndPatchAll(typeof(Hooks.LauchToTileHook));
             //if(disableAudioWarble.Value)
-            //    Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DisableAudioWarbleHook));
+            //    Harmony.CreateAndPatchAll(typeof(Hooks.DisableAudioWarbleHook));
 
-            Harmony.CreateAndPatchAll(typeof(Cuphead_Accessibility.Hooks.DebugMenuFix));
+            Harmony.CreateAndPatchAll(typeof(Hooks.DebugMenuFix));
         }
 
         private void Update()
@@ -149,15 +155,17 @@ namespace Cuphead_Accessibility
             if(displayHealthbar.Value & Level.Current != null)
                 if (Level.Current.LevelType == Level.Type.Battle)
                 {
+                    var timeline = Level.Current.timeline;
+
                     DrawRect(healthBarBackgroundPos, Color.black);
                     Rect currentHealthPos = healthBarBackgroundPos;
-                    currentHealthPos.width *= 1f - (Level.Current.timeline.damage / Level.Current.timeline.health);
+                    currentHealthPos.width *= Mathf.Max(0, 1f - (timeline.damage/timeline.health)); //damage can exceed health
                     DrawRect(currentHealthPos, Color.red);
                     
-                    if(drawExtraHealthbarInfo.Value)
+                    if(displayExtraHealthbarInfo.Value)
                     {
                         //draw phase markers on healthbar
-                        foreach (var phase in Level.Current.timeline.events)
+                        foreach (var phase in timeline.events)
                         {
                             Rect eventRect = healthBarBackgroundPos;
                             eventRect.x += (healthBarBackgroundPos.width * phase.percentage);
@@ -166,9 +174,37 @@ namespace Cuphead_Accessibility
                         }
 
                         //draw current damage/health text
-                        GUI.Label(healthBarTextPos, Level.Current.timeline.damage.ToString("0000") + "/" + Level.Current.timeline.health.ToString(), fontStyle);
+                        GUI.Label(healthBarTextPos, healthBarText, fontStyle);
                     }
                 }
+        }
+
+
+
+        public static void DisableObj(string objName)
+        {
+            var obj = GameObject.Find(objName);
+            if (obj != null)
+            {
+                obj.SetActive(false);
+            }
+        }
+        public static void DestroyObj(string objName)
+        {
+            var obj = GameObject.Find(objName);
+            if (obj != null)
+            {
+                GameObject.Destroy(obj);
+            }
+        }
+
+        public static void HideObj(string objName)
+        {
+            var obj = GameObject.Find(objName);
+            if (obj != null)
+            {
+                obj.transform.position = new Vector3(10000f, 10000f, 10000f);
+            }
         }
     }
 }
