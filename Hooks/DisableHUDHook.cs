@@ -5,31 +5,35 @@ namespace Cuphead_Accessibility.Hooks
 {
     internal class DisableHUDHook
     {
-        private static void DisableObj(string objName)
-        {
-            var obj = GameObject.Find(objName);
-            if (obj != null)
-            {
-                obj.SetActive(false);
-            }
-        }
+        //MAP
 
         [HarmonyPostfix, HarmonyPatch(typeof(MapUI), "Start")]
         private static void Start(MapUI __instance)
         {
-            DisableObj("Map_UI(Clone)/HUDCanvas");
+            Plugin.DisableObj("Map_UI(Clone)/HUDCanvas");
+        }
+
+
+
+
+
+        //LEVEL
+        private static void DisableLevelHud()
+        {
+            Plugin.HideObj("Level_HUD/Canvas/Players/");
+
         }
 
         [HarmonyPostfix, HarmonyPatch(typeof(LevelHUD), "Start")]
         private static void Start(LevelHUD __instance)
         {
-            DisableObj("Level_HUD/Canvas/Players/Cuphead/Health");
-            DisableObj("Level_HUD/Canvas/Players/Cuphead/Weapon");
-            DisableObj("Level_HUD/Canvas/Players/Cuphead/Super");
+            DisableLevelHud();
+        }
 
-            DisableObj("Level_HUD/Canvas/Players/Mugman/Health");
-            DisableObj("Level_HUD/Canvas/Players/Mugman/Weapon");
-            DisableObj("Level_HUD/Canvas/Players/Mugman/Super");
+        [HarmonyPostfix, HarmonyPatch(typeof(LevelHUD), "OnPlayerJoined")]
+        private static void OnPlayerJoined(LevelHUD __instance, ref PlayerId player)
+        {
+            DisableLevelHud();
         }
     }
 }
